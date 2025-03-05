@@ -1,0 +1,79 @@
+<nav class="navbar navbar-expand-lg "  style="background-color:  #3330A3;" style="z-index:-4;">
+        <div class="container-fluid">
+            
+            <a class="navbar-brand" href="../client/beranda.php">
+                <img src="../Logo_revisi/EduLang1.png" alt="Bootstrap" width="70" height="70">
+              </a>
+
+          <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+          </button>
+
+          <div class="collapse navbar-collapse " id="navbarNav">
+            <ul class="navbar-nav mx-auto">
+ <!-- z-index:4; position:relative; top:10px; -->
+            <form class="d-flex" style="border-radius:16px;background:#BFE3FF;" role="search" action="../client/edulang_search.php">           
+              <input class="form-control me-2" style="border: none;  width: 30cm;" type="text" placeholder="Search" aria-label="Search" name="keyword">
+            <button class="btn btn-outline-success" style="border: none; background: none; border-left: 1px;"type="submit"><i class="gg-search"></i></button>   
+          </form>
+ 
+              
+            </ul>
+        
+            
+              
+                
+                <div class="d-grid gap-2 d-md-flex justify-content-md-end">
+      
+          <div class="d-grid gap-2 d-md-flex justify-content-md-end">
+          <div class="dropdown text-center">
+  <img src="../element/market.png" alt="" id="dropdownMenuButton" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false" style="height: 60px; width: 60px;">
+  <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+  <?php
+// Query untuk mengambil data dari tabel toko_user
+$sql = "SELECT * FROM toko_user";
+$result = mysqli_query($conn, $sql);
+
+// Cek jika ada data dalam tabel
+if (mysqli_num_rows($result) > 0) {
+    // Jika ada data, tampilkan nama toko dan ubah tautan
+    $row = mysqli_fetch_assoc($result);
+    $namaToko = $row["nama_toko"];
+    echo '<p class="text-center"> <b>' . $namaToko . '</b>  </p>';
+    echo '<a class="dropdown-item text-center" href="beranda_toko.php" style="background-color: green; color: white;">Buka toko anda</a>';
+} else {
+    // Jika tidak ada data, tampilkan pesan default dan tautan "Buat Toko"
+    echo '<p class="text-center">Anda belum memiliki toko</p>';
+    echo '<a class="dropdown-item text-center" href="daftartoko.php" style="background-color: green; color: white;">Buat Toko</a>';
+}
+?></div>
+  </div>
+
+  <?php
+  
+
+  if (isset($_SESSION['logged_in']) && $_SESSION['logged_in']) {
+    // Jika pengguna sudah login, tampilkan dropdown menu "My Account" dan "Log Out"
+    echo '    
+    </div>
+    <div class="dropdown">
+        <img src="../element/acc_logo.png" alt="" id="dropdownMenuButton" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false" style="height:50px; width:80px;">
+        <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+            <a class="dropdown-item" href="#">My Account</a>
+            <a class="dropdown-item" href="../admin/logout.php">Log Out</a>
+        </div>
+    </div>';
+} else {
+    // Jika pengguna belum login, tampilkan tombol "Sign Up" dan "Login"
+    echo '
+    <button class="btn btn-secondary me-md-2" type="button" style="font-family: Poppins;" onclick="window.location.href=\'daftar.php\';">Sign Up</button>
+    <button class="btn btn-secondary" type="button" style="font-family: Poppins;" onclick="window.location.href=\'Login.php\';">Login</button>';
+}
+?>
+
+</div>
+
+              
+              </div>
+        </div>
+      </nav>
